@@ -1,0 +1,40 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja" prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset="utf-8">
+  <meta content="initial-scale=1, minimum-scale=1, width=device-width" name="viewport">
+  <title>CSD研修</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+<div class="wrapper">
+
+  <div class="header">
+    <ul class="globalNav">
+      <li class="globalNav__item"><a href="/" class="globalNav__anchor">Home</a></li>
+      <li class="globalNav__item"><a href="upload" class="globalNav__anchor">Upload</a></li>
+    </ul>
+    <!-- /.header --></div>
+
+  <div class="content">
+    <div class="upload">
+      <form action="#" th:action="@{/upload}" method="post" th:object="${imageForm}" class="upload__form"
+            enctype="multipart/form-data">
+        <div class="upload__col">
+          <div th:if="${#fields.hasErrors('file')}" th:errors="*{file}" class="validation-error">error!</div>
+          <input type="file" th:field="*{file}" class="upload__input">
+        </div>
+        <div class="upload__col">
+          <input id="upload" type="submit" class="upload__submit">
+        </div>
+      </form>
+    </div>
+    <!-- /.content --></div>
+
+  <!-- /.wrapper --></div>
+</body>
+</html>
+

@@ -1,0 +1,35 @@
+#create a network and add our services into this network:
+#so, "app" service will be able to connect to the mysql database from "db" servoce by the hostname="db":
+#jdbc:mysql://db:3306/snsppoi
+
+#Connection url for connection in the DatabaseView:
+#  jdbc:mysql://0.0.0.0:3306/snsppoi, login=snsppoi_user, password=snsppoi_pass
+#App is available at: http://localhost:8080/
+version: "3"
+
+volumes:
+  data:
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:8080"
+    depends_on:
+      - db
+  db:
+    container_name: db
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: snsppoi
+      MYSQL_USER: snsppoi_user
+      MYSQL_PASSWORD: snsppoi_pass
+      MYSQL_ROOT_PASSWORD: root_pass
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - "3306:3306"
+    restart: always
+    volumes:
+      - ./volume/data:/var/lib/mysql
